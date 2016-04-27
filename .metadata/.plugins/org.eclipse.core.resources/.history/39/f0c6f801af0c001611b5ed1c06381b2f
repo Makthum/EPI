@@ -1,0 +1,8 @@
+package com.mak.epi.bitmanipulation;
+
+public class BitManipulationTester {
+	
+	@Test
+	public void test01_create
+
+}
