@@ -2,6 +2,12 @@ package com.mak.epi.bitmanipulation;
 
 
 import com.mak.epi.exceptions.InvalidIndexException;
+import com.mak.epi.exceptions.NonPositiveIntegerException;
+
+// Solution Index
+// 5.2 swap two bits in an Integer
+// 5.3 reverse the bits
+// 5.4 Find the closest Integer with same weights
 
 public class BitManipulation {
 	private long value;
@@ -22,7 +28,7 @@ public class BitManipulation {
 		return this.value;
 	}
 
-	// index starts from 0
+	// Problem 5.2
 	public void swapBits(int locA,int locB){
 		//create temp value 
 		long result= this.value;
@@ -40,6 +46,11 @@ public class BitManipulation {
 		this.value=result;
 	}
 
+	/**
+	 * this method returns binary representation of the given value 
+	 * Leading 0's are always trimmed . 
+	 * @return 
+	 */
 	public String toBinaryString(){
 		long bitMask= 1L<< 31;
 		StringBuffer sb= new StringBuffer();
@@ -51,6 +62,39 @@ public class BitManipulation {
 		return sb.toString().replaceFirst ("^0*", "");
 	}
 
+	/**
+	 * Reverses all the bits for the initialized value
+	 * returns the reversed bits
+	 * @return
+	 */
+	public String reverseBits(){
+		int size=this.toBinaryString().length();
+		for(int i=0;i<size/2;i++){
+			swapBits(i,size-i-1);
+		}
+		return toBinaryString();
+	}
+	
+	/**
+	 * This method computes the closest Integer with the same weights
+	 */
+	public long closestIntWithSameWeight(){
+		//if number is a negative number return
+		if(this.value<0)
+			throw new NonPositiveIntegerException();
+		long x=this.value;
+		int i=0;
+		while(i<Long.SIZE-1){
+			if(((x>>>i)&1)!=((x>>>(i+1))&1)){
+				x=x^(1L<<i|1L<<(i+1));
+				return x;
+			}
+			i++;
+		}
+		return x;
+	}
+	
+	
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof BitManipulation){

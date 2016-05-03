@@ -1,8 +1,9 @@
-package com.mak.epi.bitmanipulation;
+package com.mak.epi.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import com.mak.epi.exceptions.InvalidIndexException;
+
+import com.mak.epi.bitmanipulation.BitManipulation;
 
 public class BitManipulationTester {
 	
@@ -30,6 +31,19 @@ public class BitManipulationTester {
 		BitManipulation temp = new BitManipulation(64);
 		temp.swapBits(0,6);
 		Assert.assertEquals(temp.toBinaryString(),Integer.toBinaryString(1));
+	}
+
+	@Test 
+	public void testReverseBits(){
+		BitManipulation temp= new BitManipulation(6);
+		Assert.assertEquals(temp.toBinaryString(),Integer.toBinaryString(6));
+		Assert.assertEquals(temp.reverseBits(),Integer.toBinaryString(3));
+	}
+
+	@Test
+	public void testClosestIntWithSameWeight(){
+		BitManipulation temp = new BitManipulation(6);
+		Assert.assertEquals(temp.closestIntWithSameWeight(),5);
 	}
 
 }
